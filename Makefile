@@ -12,7 +12,7 @@ CFLAGS = $(OPT) -o $(NAME)
 default: main
 
 main:
-	$(CC) $(CFLAGS) main.c
+  $(CC) $(CFLAGS) main.c
 
 clean: 
-	$(RM) $(OBJS)
+  $(RM) $(OBJS)

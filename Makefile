@@ -12,14 +12,14 @@ CFLAGS = $(OPT) $(STD)
 
 default: all
 
-all: main.o bitboard.o
-	$(CC) $(CFLAGS) -o $(NAME) main.o bitboard.o
+all: main.o board.o
+	$(CC) $(CFLAGS) -o $(NAME) main.o board.o
 
-main.o: main.cpp bitboard.h
+main.o: main.cpp board.h
 	$(CC) $(CFLAGS) -c main.cpp
 
-bitboard.o: bitboard.cpp bitboard.h
-	$(CC) $(CFLAGS) -c bitboard.cpp
+board.o: board.cpp board.h
+	$(CC) $(CFLAGS) -c board.cpp
 
 clean: 
 	$(RM) $(OBJS) *.o

@@ -1,5 +1,5 @@
-#ifndef BITBOARD_H
-#define BITBOARD_H
+#ifndef BOARD_H
+#define BOARD_H
 
 #include <cstdint>
 #include <iostream>
@@ -7,16 +7,14 @@
 
 
 
-typedef uint64_t Bitboard;
-
 enum PieceColor{
-  WHITE,
+  WHITE = 0,
   BLACK,
   NIL_COLOR
 };
 
 enum PieceType {
-  KING,
+  KING = 0,
   QUEEN,
   ROOK,
   BISHOP,
@@ -25,12 +23,15 @@ enum PieceType {
   NIL_TYPE
 };
 
+const int NUM_PIECE_COLORS = 2;
+const int NUM_PIECE_TYPES = 6;
+
 
 
 class Piece {
  public:
-  Piece() : color(NIL_COLOR), type(NIL_TYPE), location(0) { }
-  Piece(PieceColor c, PieceType t, Bitboard loc) { color = c; type = t; location = loc; }
+  Piece() : color(NIL_COLOR), type(NIL_TYPE) { }
+  Piece(PieceColor c, PieceType t) { color = c; type = t; }
 
   PieceColor getColor() { return color; }
   void setColor(PieceColor c) { color = c; }
@@ -38,15 +39,11 @@ class Piece {
   PieceType getType() { return type; }
   void setType(PieceType t) { type = t; }
 
-  Bitboard getLocation() { return location; }
-  void setLocation(Bitboard loc) { location = loc; }
-
   void print();
 
  private:
   PieceColor color;
   PieceType type;
-  Bitboard location;
 
   typedef std::map<PieceType, const char *> StringMap;
   static StringMap whiteStrings;
@@ -61,12 +58,17 @@ class Board {
   void print();
 
  private:
+  typedef uint64_t Bitboard;
+
+  int flatIndex(int row, int col);
+  Bitboard maskBoard(int row, int col);
+  Piece pieceAt(int row, int col);
+
   static const int NUM_ROWS = 8;
   static const int NUM_COLS = 8;
-  static const int NUM_PIECES = 32;
 
-  Piece board[NUM_ROWS][NUM_COLS];
-  Piece pieceList[NUM_PIECES];
+  Piece mailbox[NUM_ROWS][NUM_COLS];
+  Bitboard bits[NUM_PIECE_COLORS][NUM_PIECE_TYPES];
 };
 
-#endif /* BITBOARD_H */
+#endif /* BOARD_H */

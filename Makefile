@@ -1,18 +1,25 @@
-CC = gcc
+CC = g++
 OPT = -O3
+STD = -std=c++11
 
 RM = rm -f
 
 NAME = chess
 OBJS = $(NAME)
-CFLAGS = $(OPT) -o $(NAME)
+CFLAGS = $(STD) $(OPT)
 
 
 
-default: main
+default: all
 
-main:
-  $(CC) $(CFLAGS) main.c
+all: main.o bitboard.o
+	$(CC) $(CFLAGS) -o $(NAME) main.o bitboard.o
+
+main.o: main.cpp bitboard.h
+	$(CC) $(CFLAGS) -c main.cpp
+
+bitboard.o: bitboard.cpp bitboard.h
+	$(CC) $(CFLAGS) -c bitboard.cpp
 
 clean: 
-  $(RM) $(OBJS)
+	$(RM) $(OBJS) *.o

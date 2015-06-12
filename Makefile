@@ -6,7 +6,7 @@ RM = rm -f
 
 NAME = chess
 OBJS = $(NAME)
-CFLAGS = $(STD) $(OPT)
+CFLAGS = $(OPT) $(STD)
 
 
 

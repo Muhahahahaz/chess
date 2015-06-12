@@ -20,7 +20,7 @@ const Bitboard BPAWNS = UINT64_C(WPAWNS << 40);*/
 
 
 
-Piece::whiteStrings = {
+Piece::StringMap Piece::whiteStrings = {
   {KING, "K"},
   {QUEEN, "Q"},
   {ROOK, "R"},
@@ -30,7 +30,7 @@ Piece::whiteStrings = {
   {NIL_TYPE, " "}
 };
 
-Piece::blackStrings = {
+Piece::StringMap Piece::blackStrings = {
   {KING, "k"},
   {QUEEN, "q"},
   {ROOK, "r"},
@@ -51,8 +51,8 @@ void Piece::print() {
     case NIL_COLOR:
       cout << " ";
       break;
-    default
-      cout "?";
+    default:
+      cout << "?";
   }
 }
 

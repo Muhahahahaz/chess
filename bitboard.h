@@ -7,6 +7,8 @@
 
 
 
+typedef uint64_t Bitboard;
+
 enum PieceColor{
   WHITE,
   BLACK,
@@ -22,9 +24,6 @@ enum PieceType {
   PAWN,
   NIL_TYPE
 };
-
-typedef uint64_t Bitboard;
-typedef std::map<PieceType, const char *> StringMap;
 
 
 
@@ -49,8 +48,9 @@ class Piece {
   PieceType type;
   Bitboard location;
 
-  static const StringMap whiteStrings;
-  static const StringMap blackStrings;
+  typedef std::map<PieceType, const char *> StringMap;
+  static StringMap whiteStrings;
+  static StringMap blackStrings;
 };
 
 

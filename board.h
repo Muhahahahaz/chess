@@ -2,12 +2,11 @@
 #define BOARD_H
 
 #include <cstdint>
-#include <iostream>
 #include <map>
 
 
 
-enum PieceColor{
+enum PieceColor {
   WHITE = 0,
   BLACK,
   NIL_COLOR
@@ -39,15 +38,16 @@ class Piece {
   PieceType getType() { return type; }
   void setType(PieceType t) { type = t; }
 
+  bool isEmpty();
   void print();
 
  private:
   PieceColor color;
   PieceType type;
 
-  typedef std::map<PieceType, const char *> StringMap;
-  static StringMap whiteStrings;
-  static StringMap blackStrings;
+  typedef std::map<PieceType, const char *> PieceMap;
+  static const PieceMap whiteStrings;
+  static const PieceMap blackStrings;
 };
 
 
@@ -56,6 +56,7 @@ class Board {
  public:
   Board();
   void print();
+  void printFEN();
 
  private:
   typedef uint64_t Bitboard;

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "board.h"
 
 using std::cout;
@@ -6,7 +7,7 @@ using std::map;
 
 
 
-Piece::StringMap Piece::whiteStrings = {
+const Piece::PieceMap Piece::whiteStrings = {
   {KING, "K"},
   {QUEEN, "Q"},
   {ROOK, "R"},
@@ -16,7 +17,7 @@ Piece::StringMap Piece::whiteStrings = {
   {NIL_TYPE, " "}
 };
 
-Piece::StringMap Piece::blackStrings = {
+const Piece::PieceMap Piece::blackStrings = {
   {KING, "k"},
   {QUEEN, "q"},
   {ROOK, "r"},
@@ -26,13 +27,17 @@ Piece::StringMap Piece::blackStrings = {
   {NIL_TYPE, " "}
 };
 
+bool Piece::isEmpty() {
+  return (color == NIL_COLOR) || (type == NIL_TYPE);
+}
+
 void Piece::print() {
   switch(color) {
     case WHITE:
-      cout << whiteStrings[type];
+      cout << whiteStrings.at(type);
       break;
     case BLACK:
-      cout << blackStrings[type];
+      cout << blackStrings.at(type);
       break;
     case NIL_COLOR:
       cout << ".";
@@ -73,6 +78,27 @@ void Board::print() {
       cout << " ";
     }
     cout << endl;
+  }
+}
+
+void Board::printFEN() {
+  int blanks;
+
+  for(int i = NUM_ROWS-1; i >= 0; i--) {
+    blanks = 0;
+
+    for(int j = 0; j < NUM_COLS; j++) {
+      if(mailbox[i][j].isEmpty())
+        blanks++;
+      else {
+        if(blanks > 0) cout << blanks;
+        mailbox[i][j].print();
+        blanks = 0;
+      }
+    }
+
+    if(blanks > 0) cout << blanks;
+    if(i > 0) cout << "/";
   }
 }
 

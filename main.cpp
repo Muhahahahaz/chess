@@ -1,13 +1,15 @@
 #include <iostream>
-#include "board.h"
+#include "position.h"
 
 using std::cout;
 using std::endl;
 
 int main(int argc, char *argv[]) {
-  Board b;
+  Position p;
 
-  b.print();
+  p.print();
+  cout << endl;
+  p.printFEN();
 
   return 0;
 }
